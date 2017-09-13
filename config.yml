@@ -8,3 +8,9 @@ server:
   adminConnectors:
   - type: http
     port: 9001
+
+mongo:
+  seeds:
+  - host: localhost
+    port: 27017
+  database: lms

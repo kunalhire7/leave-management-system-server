@@ -1,17 +1,36 @@
 package com.lms.resources;
 
 import com.lms.domain.Leave;
+import com.lms.services.LmsService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 
 @Path("/leaves")
 public class LeaveResource {
 
+    private LmsService lmsService;
+
+    @Inject
+    public LeaveResource(LmsService lmsService) {
+        this.lmsService = lmsService;
+    }
+
     @GET
     @Path("/{id}")
-    public Leave get(@PathParam("id") String id) {
-        return new Leave();
+    @Produces("application/json")
+    public Response get(@PathParam("id") String id) {
+        return Response.ok().entity(lmsService.getById(id)).build();
+    }
+
+    @POST
+    public Response applyLeave(@Context UriInfo uriInfo, Leave leave) {
+        Leave savedLeave = lmsService.save(leave);
+        URI uri = uriInfo.getBaseUriBuilder().path("/leaves/" + savedLeave.getId()).build();
+        return Response.created(uri).build();
     }
 }

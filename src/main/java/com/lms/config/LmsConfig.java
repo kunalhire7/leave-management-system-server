@@ -1,6 +1,7 @@
 package com.lms.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.meltmedia.dropwizard.mongo.MongoConfiguration;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,13 +11,15 @@ public class LmsConfig extends Configuration {
     private String version;
 
     @JsonProperty
-    public String getVersion() {
-        return version;
+    private MongoConfiguration mongo;
+
+    public MongoConfiguration getMongo() {
+        return mongo;
     }
 
     @JsonProperty
-    public void setVersion(String version) {
-        this.version = version;
+    public String getVersion() {
+        return version;
     }
 
 }

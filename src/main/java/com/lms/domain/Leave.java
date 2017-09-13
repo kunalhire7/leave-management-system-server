@@ -1,20 +1,24 @@
 package com.lms.domain;
 
+import org.bson.types.ObjectId;
+import org.jongo.marshall.jackson.oid.MongoId;
+
 import java.time.Instant;
 
 public class Leave {
-    private String id;
+    @MongoId
+    private ObjectId _id;
     private String reason;
     private Instant fromDate;
     private Instant toDate;
     private LeaveType type;
 
-    public String getId() {
-        return id;
+    public ObjectId getId() {
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(ObjectId id) {
+        this._id = id;
     }
 
     public String getReason() {
