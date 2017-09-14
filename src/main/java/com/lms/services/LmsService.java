@@ -5,6 +5,7 @@ import com.lms.repositories.LeavesRepository;
 import org.jvnet.hk2.annotations.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @Service
 public class LmsService {
@@ -22,5 +23,9 @@ public class LmsService {
 
     public Leave getById(String id) {
         return leavesRepository.getById(id);
+    }
+
+    public List<Leave> getAll() {
+        return leavesRepository.getAll();
     }
 }

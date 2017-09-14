@@ -9,6 +9,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.List;
 
 @Path("/leaves")
 public class LeaveResource {
@@ -32,5 +33,11 @@ public class LeaveResource {
         Leave savedLeave = lmsService.save(leave);
         URI uri = uriInfo.getBaseUriBuilder().path("/leaves/" + savedLeave.getId()).build();
         return Response.created(uri).build();
+    }
+
+    @GET
+    @Produces("application/json")
+    public List<Leave> getLeaves() {
+        return lmsService.getAll();
     }
 }
